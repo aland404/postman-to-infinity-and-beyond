@@ -1,0 +1,76 @@
+openapi: "3.0.0"
+info:
+    version: "1.0.0"
+    title: "Users API"
+    description: Handle Users
+
+paths:
+    /users/{userId}:
+        parameters:
+            - name: userId
+              description: The unique identifier of the Users
+              in: path
+              required: true
+              schema:
+                  $ref: "#/components/schemas/UserId"
+        get:
+            summary: Read a user
+            responses:
+                "200":
+                    description: The user corresponding to the provided `userId`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/User"
+                404:
+                    description: No user found for the provided `userId`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                500:
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+components:
+    schemas:
+        UserId:
+            description: The unique identifier of a user
+            type: string
+        User:
+            type: object
+            required:
+                - id
+                - name
+                - role
+            properties:
+                id:
+                    $ref: "#/components/schemas/UserId"
+                name:
+                    type: string
+                role:
+                    type: string
+                    enum:
+                        - admin
+                        - reader
+                        - modifier
+                        - deleter
+                description:
+                    type: string
+        Error:
+            type: object
+            required:
+                - message
+            properties:
+                message:
+                    description: A human readable error message
+                    type: string
+    securitySchemes:
+        ApiKey:
+            type: apiKey
+            in: header
+            name: X-Api-Key
+security:
+    - ApiKey: []
