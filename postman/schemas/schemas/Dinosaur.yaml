@@ -1,0 +1,22 @@
+type: object
+required:
+    - id
+    - name
+    - status
+properties:
+    id:
+        $ref: "#/components/schemas/DinosaurId"
+    name:
+        description: The name of the dinosaur
+        type: string
+    size:
+        description: The size of the dinosaur
+        type: string
+        enum:
+            - XS
+            - S
+            - M
+            - L
+            - XL
+    description:
+        type: string

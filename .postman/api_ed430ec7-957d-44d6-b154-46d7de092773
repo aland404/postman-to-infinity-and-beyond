@@ -16,6 +16,7 @@ files[] = {"id":"24574593-983858f8-752e-43a6-a3bd-6b6abe7dad6a","path":"Dinosaur
 [config.relations.apiDefinition]
 rootDirectory = postman/schemas
 files[] = {"path":"index.yaml","metaData":{}}
+files[] = {"path":"schemas/Dinosaur.yaml","metaData":{}}
 
 [config.relations.apiDefinition.metaData]
 type = openapi:3

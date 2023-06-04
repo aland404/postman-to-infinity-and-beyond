@@ -40,25 +40,7 @@ components:
             description: The unique identifier of a dinosaur
             type: string
         Dinosaur:
-            type: object
-            required:
-                - id
-                - name
-                - role
-            properties:
-                id:
-                    $ref: "#/components/schemas/DinosaurId"
-                name:
-                    type: string
-                role:
-                    type: string
-                    enum:
-                        - admin
-                        - reader
-                        - modifier
-                        - deleter
-                description:
-                    type: string
+            $ref: './schemas/Dinosaur.yaml'
         Error:
             type: object
             required:
