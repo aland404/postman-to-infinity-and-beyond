@@ -1,29 +1,29 @@
 openapi: "3.0.0"
 info:
     version: "1.0.0"
-    title: "Users API"
-    description: Handle Users
+    title: "Dinosaurs API"
+    description: Handle Dinosaurs
 
 paths:
-    /users/{userId}:
+    /dinosaurs/{dinosaurId}:
         parameters:
-            - name: userId
-              description: The unique identifier of the Users
+            - name: dinosaurId
+              description: The unique identifier of the Dinosaurs
               in: path
               required: true
               schema:
-                  $ref: "#/components/schemas/UserId"
+                  $ref: "#/components/schemas/DinosaurId"
         get:
-            summary: Read a user
+            summary: Read a dinosaur
             responses:
                 "200":
-                    description: The user corresponding to the provided `userId`
+                    description: The dinosaur corresponding to the provided `dinosaurId`
                     content:
                         application/json:
                             schema:
-                                $ref: "#/components/schemas/User"
+                                $ref: "#/components/schemas/Dinosaur"
                 404:
-                    description: No user found for the provided `userId`
+                    description: No dinosaur found for the provided `dinosaurId`
                     content:
                         application/json:
                             schema:
@@ -36,10 +36,10 @@ paths:
                                 $ref: "#/components/schemas/Error"
 components:
     schemas:
-        UserId:
-            description: The unique identifier of a user
+        DinosaurId:
+            description: The unique identifier of a dinosaur
             type: string
-        User:
+        Dinosaur:
             type: object
             required:
                 - id
@@ -47,7 +47,7 @@ components:
                 - role
             properties:
                 id:
-                    $ref: "#/components/schemas/UserId"
+                    $ref: "#/components/schemas/DinosaurId"
                 name:
                     type: string
                 role:
