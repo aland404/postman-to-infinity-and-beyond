@@ -14,7 +14,21 @@
 					"name": "{dinosaurId}",
 					"item": [
 						{
-							"name": "Read a dinosaur",
+							"name": "Read dinosaurs",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "fcc951ab-d60b-442c-9089-7de82b3e6149",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"id": "ef6226df-32f4-4b2d-a9d1-e40ac8fa6a4b",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
@@ -51,9 +65,12 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/users/:dinosaurId",
+											"raw": "https://7e18-2001-861-3a42-540-c017-d13a-60fb-bfe8.ngrok-free.app/users/:dinosaurId",
+											"protocol": "https",
 											"host": [
-												"{{baseUrl}}"
+												"7e18-2001-861-3a42-540-c017-d13a-60fb-bfe8",
+												"ngrok-free",
+												"app"
 											],
 											"path": [
 												"users",
