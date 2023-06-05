@@ -1,9 +1,9 @@
-name: Newman Run
+name: Automated API tests using Newman
 
 on: push
 
 jobs:
-  newman:
+  newman-collection-path:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -11,4 +11,13 @@ jobs:
         with:
           apiKey: ${{ secrets.POSTMAN_API_KEY }}
           collection: ${{ github.workspace }}/postman/collections/Dinosaurs API.json
+          environment: 24574593-9f1b3d85-9080-47b5-bd81-95ed440581c1
+  newman-collection-id:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: matt-ball/newman-action@master
+        with:
+          apiKey: ${{ secrets.POSTMAN_API_KEY }}
+          collection: 24574593-97fcf16d-a781-48b4-af69-303fc6cd3e1a
           environment: 24574593-9f1b3d85-9080-47b5-bd81-95ed440581c1
