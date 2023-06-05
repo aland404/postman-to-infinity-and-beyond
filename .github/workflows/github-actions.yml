@@ -3,7 +3,7 @@ name: Automated API tests using Postman CLI
 on: push
 
 jobs:
-  automated-api-tests:
+  postman-cli-collection-path:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -15,5 +15,19 @@ jobs:
       - name: Run API tests
         run: |
           postman collection run "${{ github.workspace }}/postman/collections/Dinosaurs API.json" -e "24574593-9f1b3d85-9080-47b5-bd81-95ed440581c1" --integration-id "141759-${{ github.run_id }}"
+          # Lint your API using Postman CLI
+          postman api lint ed430ec7-957d-44d6-b154-46d7de092773 --integration-id 141759
+  postman-cli-collection-id:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Postman CLI
+        run: |
+          curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
+      - name: Login to Postman CLI
+        run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
+      - name: Run API tests
+        run: |
+          postman collection run 24574593-97fcf16d-a781-48b4-af69-303fc6cd3e1a -e "24574593-9f1b3d85-9080-47b5-bd81-95ed440581c1" --integration-id "141759-${{ github.run_id }}"
           # Lint your API using Postman CLI
           postman api lint ed430ec7-957d-44d6-b154-46d7de092773 --integration-id 141759
