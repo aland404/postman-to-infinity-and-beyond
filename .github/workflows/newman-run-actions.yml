@@ -1,0 +1,14 @@
+name: Newman Run
+
+on: push
+
+jobs:
+  newman:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: matt-ball/newman-action@master
+        with:
+          apiKey: ${{ secrets.POSTMAN_API_KEY }}
+          collection: ${{ github.workspace }}/postman/collections/Dinosaurs API.json
+          environment: 24574593-9f1b3d85-9080-47b5-bd81-95ed440581c1
