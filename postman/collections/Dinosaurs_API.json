@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "983858f8-752e-43a6-a3bd-6b6abe7dad6a",
-		"name": "Dinosaurs API",
+		"name": "Dinosaurs_API",
 		"description": "Handle Users",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_uid": "24574593-983858f8-752e-43a6-a3bd-6b6abe7dad6a"
@@ -14,7 +14,21 @@
 					"name": "{dinosaurId}",
 					"item": [
 						{
-							"name": "Read a dinosaur",
+							"name": "Read dinosaurs",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "fcc951ab-d60b-442c-9089-7de82b3e6149",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"id": "ef6226df-32f4-4b2d-a9d1-e40ac8fa6a4b",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
