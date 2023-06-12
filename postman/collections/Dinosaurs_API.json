@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "983858f8-752e-43a6-a3bd-6b6abe7dad6a",
-		"name": "Dinosaurs API",
+		"name": "Dinosaurs_API",
 		"description": "Handle Users",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_uid": "24574593-983858f8-752e-43a6-a3bd-6b6abe7dad6a"
