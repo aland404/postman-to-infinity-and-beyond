@@ -1,23 +1,29 @@
-name: Automated API tests using Newman
+name: Automated API tests - Newman
 
 on: push
+
+env:
+  COLLECTION_ID: 24574593-b537b40b-930a-4255-85b8-fe85e71026d8
+  ENVIRONMENT_ID: 24574593-5c19695f-a80c-4e99-8efe-20b61147ce3f
+  POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
 
 jobs:
   newman-collection-path:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - uses: matt-ball/newman-action@master
-        with:
-          apiKey: ${{ secrets.POSTMAN_API_KEY }}
-          collection: ${{ github.workspace }}/postman/collections/Dinosaurs API.json
-          environment: 24574593-9f1b3d85-9080-47b5-bd81-95ed440581c1
+      - name: Checks-out repository under $GITHUB_WORKSPACE
+        uses: actions/checkout@master
+      - name: Install Newman
+        run: npm install -g newman
+      - name: Run collection with Newman
+        run: newman run ${{ github.workspace }}/postman/collections/Dinosaurs_API.json --environment https://api.postman.com/environments/${{ env.ENVIRONMENT_ID }}?apikey=${{ env.POSTMAN_API_KEY }}
+
   newman-collection-id:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - uses: matt-ball/newman-action@master
-        with:
-          apiKey: ${{ secrets.POSTMAN_API_KEY }}
-          collection: 24574593-983858f8-752e-43a6-a3bd-6b6abe7dad6a
-          environment: 24574593-9f1b3d85-9080-47b5-bd81-95ed440581c1
+      - name: Checks-out your repository under $GITHUB_WORKSPACE
+        uses: actions/checkout@master
+      - name: Install Newman
+        run: npm install -g newman
+      - name: Run collection with Newman
+        run: newman run https://api.postman.com/collections/${{ env.COLLECTION_ID }}?apikey=${{ env.POSTMAN_API_KEY }} --environment https://api.postman.com/environments/${{ env.ENVIRONMENT_ID }}?apikey=${{ env.POSTMAN_API_KEY }}
