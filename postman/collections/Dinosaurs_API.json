@@ -65,12 +65,9 @@
 											}
 										],
 										"url": {
-											"raw": "https://7e18-2001-861-3a42-540-c017-d13a-60fb-bfe8.ngrok-free.app/users/:dinosaurId",
-											"protocol": "https",
+											"raw": "{{baseUrl}}/users/:dinosaurId",
 											"host": [
-												"7e18-2001-861-3a42-540-c017-d13a-60fb-bfe8",
-												"ngrok-free",
-												"app"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"users",
