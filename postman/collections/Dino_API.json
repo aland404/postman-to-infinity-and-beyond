@@ -1,0 +1,451 @@
+{
+	"info": {
+		"_postman_id": "1bf01f8a-edbe-45cc-a2e0-8c1a8dd82335",
+		"name": "Dino_API",
+		"description": "Handle Dinosaurs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "24574593-1bf01f8a-edbe-45cc-a2e0-8c1a8dd82335"
+	},
+	"item": [
+		{
+			"name": "v1",
+			"item": [
+				{
+					"name": "dinosaurs",
+					"item": [
+						{
+							"name": "{dinosaurId}",
+							"item": [
+								{
+									"name": "Get a specific dinosaur by its id",
+									"id": "0ba642ee-9d11-42f1-bd48-4f003a18f64c",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/v1/dinosaurs/:dinosaurId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"v1",
+												"dinosaurs",
+												":dinosaurId"
+											],
+											"variable": [
+												{
+													"key": "dinosaurId",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "287d5318-cb94-441d-886e-901092d82b7f",
+											"name": "The dinosaur corresponding to the provided `dinosaurId`",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/v1/dinosaurs/:dinosaurId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"v1",
+														"dinosaurs",
+														":dinosaurId"
+													],
+													"variable": [
+														{
+															"key": "dinosaurId"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"size\": \"L\",\n  \"description\": \"<string>\"\n}"
+										},
+										{
+											"id": "89daae80-c6b1-4092-9aa2-0490a5345f09",
+											"name": "No dinosaur found for the provided `dinosaurId`",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/v1/dinosaurs/:dinosaurId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"v1",
+														"dinosaurs",
+														":dinosaurId"
+													],
+													"variable": [
+														{
+															"key": "dinosaurId"
+														}
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"<string>\"\n}"
+										},
+										{
+											"id": "e819e056-73f3-40ec-a6cc-3c04fac0dc13",
+											"name": "Access token is missing or invalid",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/v1/dinosaurs/:dinosaurId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"v1",
+														"dinosaurs",
+														":dinosaurId"
+													],
+													"variable": [
+														{
+															"key": "dinosaurId"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": []
+										},
+										{
+											"id": "90484858-5044-41be-894a-873c100ff239",
+											"name": "The access to the requested resource is prohibited",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/v1/dinosaurs/:dinosaurId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"v1",
+														"dinosaurs",
+														":dinosaurId"
+													],
+													"variable": [
+														{
+															"key": "dinosaurId"
+														}
+													]
+												}
+											},
+											"status": "Forbidden",
+											"code": 403,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": []
+										},
+										{
+											"id": "22f07560-5e43-4c58-a8b3-c930c1e4f94b",
+											"name": "Unexpected error",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/v1/dinosaurs/:dinosaurId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"v1",
+														"dinosaurs",
+														":dinosaurId"
+													],
+													"variable": [
+														{
+															"key": "dinosaurId"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"<string>\"\n}"
+										}
+									]
+								}
+							],
+							"id": "37f6f47a-c32a-4c5a-9c57-24c7c2288b4a"
+						}
+					],
+					"id": "bd4b0d7e-bc88-47f8-99e6-c546f8982787"
+				}
+			],
+			"id": "0723004a-62a4-426a-b5a5-d036ec011614"
+		},
+		{
+			"name": "Get all dinosaurs",
+			"id": "d4cc94bf-3b0c-450e-b9ad-c6556653a3be",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/v1/dinosaurs",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"dinosaurs"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "90ec62b1-95a4-471c-b36f-e2a4b3dd27f4",
+					"name": "All existing and alive dinosaurs",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"description": "Added as a part of security scheme: bearer",
+								"key": "Authorization",
+								"value": "Bearer <token>"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/dinosaurs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"dinosaurs"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "Text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"value\": \"reference #/components/schemas/Dinosaurs not found in the OpenAPI spec\"\n}"
+				},
+				{
+					"id": "71ae3513-427c-4dff-acf0-da76844c0d26",
+					"name": "Access token is missing or invalid",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: bearer",
+								"key": "Authorization",
+								"value": "Bearer <token>"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/dinosaurs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"dinosaurs"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": []
+				},
+				{
+					"id": "d286790e-9650-4d9a-89e1-69d716ce57f4",
+					"name": "The access to the requested resource is prohibited",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: bearer",
+								"key": "Authorization",
+								"value": "Bearer <token>"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/dinosaurs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"dinosaurs"
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": []
+				},
+				{
+					"id": "23c8bf48-37a1-4d3b-b3ba-8373c8cd2151",
+					"name": "Unexpected error",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"description": "Added as a part of security scheme: bearer",
+								"key": "Authorization",
+								"value": "Bearer <token>"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/dinosaurs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"dinosaurs"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "Text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"message\": \"non sunt\"\n}"
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{bearerToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"id": "5e65f73e-5ca0-4d29-8aae-59208e4c26b5",
+			"key": "baseUrl",
+			"value": "http://localhost:3010/v1",
+			"type": "string"
+		}
+	]
+}

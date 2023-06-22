@@ -2,7 +2,6 @@ type: object
 required:
     - id
     - name
-    - status
 properties:
     id:
         $ref: "#/components/schemas/DinosaurId"

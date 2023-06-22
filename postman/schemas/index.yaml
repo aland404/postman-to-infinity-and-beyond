@@ -1,20 +1,38 @@
 openapi: "3.0.0"
+servers:
+    - url: http://localhost:3010/v1
+      description: Localhost server
 info:
     version: "1.0.0"
     title: "Dinosaurs API"
     description: Handle Dinosaurs
 
 paths:
-    /dinosaurs/{dinosaurId}:
-        parameters:
-            - name: dinosaurId
-              description: The unique identifier of the Dinosaurs
-              in: path
-              required: true
-              schema:
-                  $ref: "#/components/schemas/DinosaurId"
+    /v1/dinosaurs:
         get:
-            summary: Read a dinosaur
+            summary: Get all dinosaurs
+            responses:
+                200:
+                    description: All existing and alive dinosaurs
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Dinosaurs"
+                401:
+                    $ref: "#/components/responses/UnauthorizedError"
+                403:
+                    $ref: "#/components/responses/ForbiddenError"
+                500:
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+    /v1/dinosaurs/{dinosaurId}:
+        parameters:
+            - $ref: "#/components/parameters/dinosaurId"
+        get:
+            summary: Get a specific dinosaur by its id
             responses:
                 "200":
                     description: The dinosaur corresponding to the provided `dinosaurId`
@@ -22,12 +40,16 @@ paths:
                         application/json:
                             schema:
                                 $ref: "#/components/schemas/Dinosaur"
-                404:
+                204:
                     description: No dinosaur found for the provided `dinosaurId`
                     content:
                         application/json:
                             schema:
                                 $ref: "#/components/schemas/Error"
+                401:
+                    $ref: "#/components/responses/UnauthorizedError"
+                403:
+                    $ref: "#/components/responses/ForbiddenError"
                 500:
                     description: Unexpected error
                     content:
@@ -36,11 +58,8 @@ paths:
                                 $ref: "#/components/schemas/Error"
 components:
     schemas:
-        DinosaurId:
-            description: The unique identifier of a dinosaur
-            type: string
         Dinosaur:
-            $ref: './schemas/Dinosaur.yaml'
+            $ref: "./schemas/Dinosaur.yaml"
         Error:
             type: object
             required:
@@ -49,10 +68,35 @@ components:
                 message:
                     description: A human readable error message
                     type: string
+    parameters:
+        dinosaurId:
+            $ref: "./parameters/path/DinosaurId.yaml"
     securitySchemes:
         ApiKey:
             type: apiKey
             in: header
             name: X-Api-Key
+        BearerAuth: # arbitrary name for the security scheme
+            type: http
+            scheme: bearer
+            bearerFormat: JWT # optional, arbitrary value for documentation purposes
+        Oauth2:
+            type: oauth2
+            flows:
+                authorizationCode:
+                    authorizationUrl: https://example.com/oauth/authorize
+                    tokenUrl: https://example.com/oauth/token
+                    scopes:
+                        read: Grants read access
+                        write: Grants write access
+                        admin: Grants access to admin operations
+    responses:
+        UnauthorizedError:
+            description: Access token is missing or invalid
+        ForbiddenError:
+            description: The access to the requested resource is prohibited
 security:
-    - ApiKey: []
+    - BearerAuth: []
+    - OAuth2:
+          - read
+          - write
