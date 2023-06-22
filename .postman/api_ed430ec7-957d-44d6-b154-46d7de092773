@@ -9,14 +9,16 @@ id = ed430ec7-957d-44d6-b154-46d7de092773
 
 [config.relations.collections]
 rootDirectory = postman/collections
-files[] = {"id":"24574593-983858f8-752e-43a6-a3bd-6b6abe7dad6a","path":"Dinosaurs_API.json","metaData":{}}
+files[] = {"id":"24574593-1bf01f8a-edbe-45cc-a2e0-8c1a8dd82335","path":"Dino_API.json","metaData":{"generateCollectionPreferences":"{\"requestNameSource\":\"Fallback\",\"indentCharacter\":\"Space\",\"parametersResolution\":\"Schema\",\"folderStrategy\":\"Paths\",\"includeAuthInfoInExample\":true,\"enableOptionalParameters\":true,\"keepImplicitHeaders\":false,\"includeDeprecated\":true,\"alwaysInheritAuthentication\":false,\"updateCollectionSync\":true,\"requestParametersResolution\":\"Schema\",\"exampleParametersResolution\":\"Schema\"}"}}
 
 [config.relations.collections.metaData]
 
 [config.relations.apiDefinition]
 rootDirectory = postman/schemas
 files[] = {"path":"index.yaml","metaData":{}}
+files[] = {"path":"parameters/path/DinosaurId.yaml","metaData":{}}
 files[] = {"path":"schemas/Dinosaur.yaml","metaData":{}}
+files[] = {"path":"schemas/Dinosaurs.yaml","metaData":{}}
 
 [config.relations.apiDefinition.metaData]
 type = openapi:3
