@@ -23,80 +23,77 @@ paths:
                 403:
                     $ref: "#/components/responses/ForbiddenError"
                 500:
-                    description: Unexpected error
-                    content:
-                        application/json:
-                            schema:
-                                $ref: "#/components/schemas/Error"
+                    $ref: "#/components/responses/UnexpectedError"
+            security: 
+                - OAuth2: 
+                    - read:dinosaurs
+            
     /v1/dinosaurs/{dinosaurId}:
         parameters:
             - $ref: "#/components/parameters/dinosaurId"
         get:
             summary: Get a specific dinosaur by its id
             responses:
-                "200":
+                200:
                     description: The dinosaur corresponding to the provided `dinosaurId`
                     content:
                         application/json:
                             schema:
                                 $ref: "#/components/schemas/Dinosaur"
                 204:
-                    description: No dinosaur found for the provided `dinosaurId`
-                    content:
-                        application/json:
-                            schema:
-                                $ref: "#/components/schemas/Error"
+                    $ref: "#/components/responses/NotFoundError"
                 401:
                     $ref: "#/components/responses/UnauthorizedError"
                 403:
                     $ref: "#/components/responses/ForbiddenError"
                 500:
-                    description: Unexpected error
-                    content:
-                        application/json:
-                            schema:
-                                $ref: "#/components/schemas/Error"
+                    $ref: "#/components/responses/UnexpectedError"
+            security: 
+                - OAuth2: 
+                    - read:dinosaurs
+
 components:
     schemas:
+        DinosaurId:
+            $ref: "./schemas/DinosaurId.yaml"
         Dinosaur:
             $ref: "./schemas/Dinosaur.yaml"
+        Dinosaurs:
+            $ref: "./schemas/Dinosaurs.yaml"
         Error:
-            type: object
-            required:
-                - message
-            properties:
-                message:
-                    description: A human readable error message
-                    type: string
+            $ref: "./schemas/Error.yaml"
     parameters:
         dinosaurId:
             $ref: "./parameters/path/DinosaurId.yaml"
-    securitySchemes:
-        ApiKey:
-            type: apiKey
-            in: header
-            name: X-Api-Key
-        BearerAuth: # arbitrary name for the security scheme
-            type: http
-            scheme: bearer
-            bearerFormat: JWT # optional, arbitrary value for documentation purposes
-        Oauth2:
-            type: oauth2
-            flows:
-                authorizationCode:
-                    authorizationUrl: https://example.com/oauth/authorize
-                    tokenUrl: https://example.com/oauth/token
-                    scopes:
-                        read: Grants read access
-                        write: Grants write access
-                        admin: Grants access to admin operations
     responses:
-        UnauthorizedError:
-            description: Access token is missing or invalid
         ForbiddenError:
             description: The access to the requested resource is prohibited
-security:
-    - BearerAuth: []
-    - OAuth2:
-          - read
-          - write
+            content:
+                application/json:
+                    schema:
+                        $ref: "#/components/schemas/Error"
+        NotFoundError:
+            description: No dinosaur found for the provided `dinosaurId`
+        UnauthorizedError:
+            description: Access token is missing or invalid
+            content:
+                application/json:
+                    schema:
+                        $ref: "#/components/schemas/Error"
+        UnexpectedError:
+            description: Unexpected error
+            content:
+                application/json:
+                    schema:
+                        $ref: "#/components/schemas/Error"
+    securitySchemes:
+        OAuth2:
+            type: oauth2
+            description: tokenUrl --> https://breizhcamp.eu.auth0.com/oauth/token
+            flows: 
+                clientCredentials: 
+                    tokenUrl: https://breizhcamp.eu.auth0.com/oauth/token
+                    scopes:
+                        read:dinosaurs: Grants read dinosaurs access
+                        update:dinosaurs: Grants write access
+                        delete:dinosaurs: Grants access to admin operations

@@ -4,7 +4,7 @@ required:
     - name
 properties:
     id:
-        $ref: "#/components/schemas/DinosaurId"
+        $ref: "#/components/parameters/dinosaurId/schema"
     name:
         description: The name of the dinosaur
         type: string
