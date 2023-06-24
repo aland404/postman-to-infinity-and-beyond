@@ -1,0 +1,11 @@
+type: object
+required:
+    - code
+    - message
+properties:
+    code:
+        description: A code to identify the error
+        type: number
+    message:
+        description: A readable error message
+        type: string

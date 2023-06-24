@@ -1,0 +1,492 @@
+{
+	"info": {
+		"_postman_id": "e7dfea8b-44d1-4151-9ea6-8ea4926d3a4a",
+		"name": "Dinosaurs_API",
+		"description": "Handle Dinosaurs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "24574593-e7dfea8b-44d1-4151-9ea6-8ea4926d3a4a"
+	},
+	"item": [
+		{
+			"name": "Get all dinosaurs",
+			"id": "f313503e-66b2-41e3-be98-81049b3494f9",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "scope",
+							"value": "read:dinosaurs update:dinosaurs delete:dinosaurs",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "https://breizhcamp.eu.auth0.com/oauth/token",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/v1/dinosaurs",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"dinosaurs"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "dea572e2-2506-40c3-871a-d500baeb3f50",
+					"name": "All existing and alive dinosaurs",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"description": "Added as a part of security scheme: oauth2",
+								"key": "Authorization",
+								"value": "<token>"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/dinosaurs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"dinosaurs"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"size\": \"XL\",\n    \"description\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"size\": \"L\",\n    \"description\": \"<string>\"\n  }\n]"
+				},
+				{
+					"id": "5580c985-1c25-4fb7-acd0-ba441f0d88f1",
+					"name": "Access token is missing or invalid",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"description": "Added as a part of security scheme: oauth2",
+								"key": "Authorization",
+								"value": "<token>"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/dinosaurs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"dinosaurs"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}"
+				},
+				{
+					"id": "0670bd3b-d19f-428a-949f-b2d28a3048f0",
+					"name": "The access to the requested resource is prohibited",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"description": "Added as a part of security scheme: oauth2",
+								"key": "Authorization",
+								"value": "<token>"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/dinosaurs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"dinosaurs"
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}"
+				},
+				{
+					"id": "3ad4837f-e261-4f7d-b256-830705e940c3",
+					"name": "Unexpected error",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"description": "Added as a part of security scheme: oauth2",
+								"key": "Authorization",
+								"value": "<token>"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/dinosaurs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"dinosaurs"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get a specific dinosaur by its id",
+			"id": "43ea4c91-7483-4b99-81c4-fd3890890628",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "scope",
+							"value": "read:dinosaurs update:dinosaurs delete:dinosaurs",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "https://breizhcamp.eu.auth0.com/oauth/token",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/v1/dinosaurs/:dinosaurId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"dinosaurs",
+						":dinosaurId"
+					],
+					"variable": [
+						{
+							"key": "dinosaurId",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "46b8ea2a-7c3e-43cd-a335-9f7754ab5535",
+					"name": "The dinosaur corresponding to the provided `dinosaurId`",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"description": "Added as a part of security scheme: oauth2",
+								"key": "Authorization",
+								"value": "<token>"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/dinosaurs/:dinosaurId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"dinosaurs",
+								":dinosaurId"
+							],
+							"variable": [
+								{
+									"key": "dinosaurId"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"size\": \"M\",\n  \"description\": \"<string>\"\n}"
+				},
+				{
+					"id": "e34da162-abc0-4718-9835-810044f43195",
+					"name": "No dinosaur found for the provided `dinosaurId`",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: oauth2",
+								"key": "Authorization",
+								"value": "<token>"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/dinosaurs/:dinosaurId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"dinosaurs",
+								":dinosaurId"
+							],
+							"variable": [
+								{
+									"key": "dinosaurId"
+								}
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "text",
+					"header": [],
+					"cookie": []
+				},
+				{
+					"id": "530099f4-c5eb-4561-b7ca-0183463d0a90",
+					"name": "Access token is missing or invalid",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"description": "Added as a part of security scheme: oauth2",
+								"key": "Authorization",
+								"value": "<token>"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/dinosaurs/:dinosaurId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"dinosaurs",
+								":dinosaurId"
+							],
+							"variable": [
+								{
+									"key": "dinosaurId"
+								}
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}"
+				},
+				{
+					"id": "ea998c1b-2e3f-4b8f-99d8-cbf32da54358",
+					"name": "The access to the requested resource is prohibited",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"description": "Added as a part of security scheme: oauth2",
+								"key": "Authorization",
+								"value": "<token>"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/dinosaurs/:dinosaurId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"dinosaurs",
+								":dinosaurId"
+							],
+							"variable": [
+								{
+									"key": "dinosaurId"
+								}
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}"
+				},
+				{
+					"id": "a628fad7-65f8-4298-bdca-08b10ef4c311",
+					"name": "Unexpected error",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"description": "Added as a part of security scheme: oauth2",
+								"key": "Authorization",
+								"value": "<token>"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/dinosaurs/:dinosaurId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"dinosaurs",
+								":dinosaurId"
+							],
+							"variable": [
+								{
+									"key": "dinosaurId"
+								}
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"id": "830b7e11-d95c-4002-a90a-780d9e9a9323",
+			"key": "baseUrl",
+			"value": "http://localhost:3010/v1"
+		}
+	]
+}
