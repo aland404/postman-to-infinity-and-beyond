@@ -169,18 +169,6 @@
             ],
             "type": "text/javascript"
           }
-        },
-        {
-          "listen": "test",
-          "script": {
-            "id": "85c0b061-8284-48e3-b8b1-793bd9153308",
-            "exec": [
-              "",
-              "",
-              "pm.collectionVariables.set(\"currentUser\", \"variable_value\");"
-            ],
-            "type": "text/javascript"
-          }
         }
       ],
       "id": "055829fc-85ce-4374-89ff-a48a97c7370c",
