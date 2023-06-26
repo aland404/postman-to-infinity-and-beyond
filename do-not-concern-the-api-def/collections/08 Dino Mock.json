@@ -1,0 +1,141 @@
+{
+  "info": {
+    "_postman_id": "2008ef71-3cd0-4339-a1f9-9eabf4326456",
+    "name": "08 Dino Mock",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Observer un tyrannosaure",
+      "id": "c3ad4363-8e4a-4361-bb2c-eb99cef00328",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "{{url}}/dinosaurs/tearex",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "dinosaurs",
+            "tearex"
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "d92c3c73-f3f6-4969-8b79-a51c08c46b32",
+          "name": "Default",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{url}}/dinosaurs/tearex",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "dinosaurs",
+                "tearex"
+              ]
+            }
+          },
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "name": "Content-Type",
+              "value": "application/json",
+              "description": "",
+              "type": "text"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "{\n    \"id\": \"tearex\",\n    \"firstName\": \"Tea\",\n    \"lastName\": \"Rex\",\n    \"name\": \"tearexosaurus\",\n    \"size\": \"XXL\",\n    \"description\": \"Un grand prédateur avec des petits bras\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Observer tous les dinosaures",
+      "id": "3f97c570-3222-4798-a7d3-e4650a41239a",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "{{url}}/dinosaurs/tearex",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "dinosaurs",
+            "tearex"
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "d83b548e-4dae-4f0f-a11e-07140c81cf22",
+          "name": "Default",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{url}}/dinosaurs",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "dinosaurs"
+              ]
+            }
+          },
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "name": "Content-Type",
+              "value": "application/json",
+              "description": "",
+              "type": "text"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "[\n    {\n        \"id\": \"tearex\",\n        \"firstName\": \"Tea\",\n        \"lastName\": \"Rex\",\n        \"name\": \"tearexosaurus\",\n        \"size\": \"XXL\",\n        \"description\": \"Un grand prédateur avec des petits bras\"\n    }\n]"
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "id": "4fb3be1c-d18d-41ce-8b06-cc56703c078d",
+      "key": "url",
+      "value": "TBD"
+    }
+  ]
+}
