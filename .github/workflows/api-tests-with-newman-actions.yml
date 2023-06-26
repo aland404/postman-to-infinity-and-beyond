@@ -16,7 +16,7 @@ jobs:
       - name: Install Newman
         run: npm install -g newman
       - name: Run collection with Newman
-        run: newman run ${{ github.workspace }}/do-not-concern-the-api-def/collections/05_Tests_fonctionnels.json --environment https://api.postman.com/environments/${{ env.ENVIRONMENT_ID }}?apikey=${{ env.POSTMAN_API_KEY }}
+        run: newman run ${{ github.workspace }}/postman-without-api-def/collections/05_Tests_fonctionnels.json --environment https://api.postman.com/environments/${{ env.ENVIRONMENT_ID }}?apikey=${{ env.POSTMAN_API_KEY }}
 
   newman-collection-id:
     runs-on: ubuntu-latest
