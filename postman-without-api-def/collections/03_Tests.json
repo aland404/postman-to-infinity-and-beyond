@@ -276,11 +276,11 @@
               "    pm.response.to.have.status(200);",
               "});",
               "",
-              "pm.test(\"Returns a list of users\", function () {",
+              "pm.test(\"Returns a list of dinosaurs\", function () {",
               "    pm.expect(jsonData.length >= 0).to.be.true;",
               "});",
               "",
-              "pm.test(\"The last user is the last created\", function () {",
+              "pm.test(\"The last dinosaur is the last created\", function () {",
               "    pm.expect(jsonData[jsonData.length-1].id).to.eql(pm.collectionVariables.get(\"currentSlug\"));",
               "});"
             ],
