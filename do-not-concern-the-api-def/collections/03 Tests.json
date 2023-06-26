@@ -1,0 +1,445 @@
+{
+  "info": {
+    "_postman_id": "7f1df786-9605-4127-8d0b-44ca7afe3f9f",
+    "name": "03 Tests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Récupération d'un token",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "a7431d49-a299-441e-870e-6f15474edbaf",
+            "exec": [
+              "const response = pm.response.json();",
+              "",
+              "pm.collectionVariables.set(\"token\", response.access_token);"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "5aa026ca-98fb-47e6-b808-9f586d43ba94",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "f2e0e2db-bfae-42aa-a800-b8e761a27825",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"client_id\":\"{{clientId}}\",\n    \"client_secret\":\"{{clientSecret}}\",\n    \"audience\":\"{{audience}}\",\n    \"grant_type\":\"client_credentials\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{urlToGetToken}}",
+          "host": [
+            "{{urlToGetToken}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Lecture de tous les dinosaures",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "81175426-d101-44b9-9ae2-ba0434c6a96a",
+            "exec": [
+              "const jsonData = pm.response.json();",
+              "",
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Returns a list of dinosaurs\", function () {",
+              "    pm.expect(jsonData.length >= 0).to.be.true;",
+              "});",
+              "",
+              "pm.test(\"Response time is less than 200ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(200);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "adeba408-4c21-4acd-b727-4f484fa7f31c",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/{{apiVersion}}/{{context}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "{{apiVersion}}",
+            "{{context}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Créer un dinosaure",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "e9eaa154-49c6-4c95-8832-01430c165aec",
+            "exec": [
+              "const firstName = pm.variables.replaceIn(\"{{$randomFirstName}}\");",
+              "const lastName = pm.variables.replaceIn(\"{{$randomLastName}}\");",
+              "const name = `${firstName.toLowerCase()}${lastName.toLowerCase()}${pm.globals.get(\"dinoSuffix\")}`;",
+              "const slug = `${firstName.toLowerCase().charAt(0)}${lastName.toLowerCase()}`;",
+              "",
+              "pm.variables.set(\"slug\", slug);",
+              "pm.variables.set(\"firstName\", firstName);",
+              "pm.variables.set(\"lastName\", lastName);",
+              "pm.variables.set(\"name\", name);",
+              "",
+              "// For the following tests",
+              "pm.collectionVariables.set(\"currentSlug\", slug);"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "085ab08c-7e49-4d45-ba3a-b2761d273bfa",
+            "exec": [
+              "const response = pm.response.json();",
+              "const body = JSON.parse(pm.request.body.toString());",
+              "",
+              "// Validate that the response status code",
+              "pm.test(\"Status code is 201\", function () {",
+              "    pm.response.to.have.status(201);",
+              "    pm.response.to.have.status(\"Created\");",
+              "});",
+              "// Validate that the response is json object",
+              "pm.test(\"Response headers have expected values\", function () {",
+              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+              "    pm.expect(pm.response.headers.get(\"Content-Length\")).to.exist;",
+              "});",
+              "// Validate that the response is json object",
+              "pm.test(\"Response is a json object\", function () {",
+              "    pm.expect(response).to.be.an('object');",
+              "});",
+              "// Validate that the response matches the expected schema",
+              "pm.test(\"Response to have 'arg' object\", function () {",
+              "    // Check the expected properties exist",
+              "    pm.expect(response).to.have.property('id');",
+              "    // Check the values have the expected types",
+              "    pm.expect(response.id).to.be.a('string');",
+              "});",
+              "// Validate that the response matches the expected values",
+              "pm.test(\"Body matches json as expected\", function () {",
+              "    pm.expect(response.firstName).to.eql(pm.variables.get(\"firstName\"));",
+              "    pm.expect(response.lastName).to.eql(pm.variables.get(\"lastName\"));",
+              "    pm.expect(response.name).to.eql(pm.variables.get(\"name\"));",
+              "    pm.expect(response.id).to.eql(pm.variables.get(\"slug\"));",
+              "});",
+              "// Validate that the response time is good enough",
+              "pm.test(\"Response time is less than 400ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(400);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "eb6de778-26fc-419c-981b-1ba664b414b5",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"slug\": \"{{slug}}\",\n    \"firstName\": \"{{firstName}}\",\n    \"lastName\": \"{{lastName}}\",\n    \"name\": \"{{name}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/{{apiVersion}}/{{context}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "{{apiVersion}}",
+            "{{context}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Observer un dinosaure",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "65586fd8-6ad5-46d1-bb24-c32c54158ddf",
+            "exec": [
+              "const jsonData = pm.response.json();",
+              "// console.log(jsonData);",
+              "",
+              "const schema = {",
+              "    \"type\": \"object\",",
+              "    \"properties\": { // propertis ?",
+              "        \"ids\": { \"type\": \"boolean\" }, // idd ?",
+              "        \"firstName\": { \"type\": \"string\" },",
+              "        \"lastName\": { \"type\": \"string\" },",
+              "        \"name\": { \"type\": \"string\" },",
+              "    },",
+              "    \"required\": [\"id\", \"firstName\", \"lastName\", \"name\"], // pas required ?",
+              "    // \"additionalProperties\": false",
+              "}",
+              "",
+              "// Test that the response matches the expected schema using built-in schema verification",
+              "pm.test('Schema is valid - tv4', function () {",
+              "    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+              "});",
+              "pm.test('Schema is valid - Ajv', function () {",
+              "    var Ajv = require('ajv');",
+              "    var ajv = new Ajv({logger: console});",
+              "    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+              "});",
+              "pm.test('Schema is valid - jsonSchema', function () {",
+              "    pm.response.to.have.jsonSchema(schema);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "7f35ae61-cb8f-44a0-b4e9-5e21bd3a5e01",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/{{apiVersion}}/{{context}}/{{currentSlug}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "{{apiVersion}}",
+            "{{context}}",
+            "{{currentSlug}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Observer tous les dinosaures",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "d3174420-1786-4643-b2f7-2748ac548dec",
+            "exec": [
+              "const jsonData = pm.response.json();",
+              "",
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Returns a list of users\", function () {",
+              "    pm.expect(jsonData.length >= 0).to.be.true;",
+              "});",
+              "",
+              "pm.test(\"The last user is the last created\", function () {",
+              "    pm.expect(jsonData[jsonData.length-1].id).to.eql(pm.collectionVariables.get(\"currentSlug\"));",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "680f4fdb-5c3c-4e82-aab2-92546770fb19",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/{{apiVersion}}/{{context}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "{{apiVersion}}",
+            "{{context}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Faire évoluer un dinosaure",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "60b438e2-d265-449d-93d1-72dd1fe2ba29",
+            "exec": [
+              "const urlToGetDinosaurs = `${pm.environment.get(\"baseUrl\")}/${pm.collectionVariables.get(\"apiVersion\")}/${pm.environment.get(\"context\")}`;",
+              "",
+              "// FAIRE UNE PRE REQUETE POUR ALLER LIRE UN DINOSAURE ET SETTER LES CURRENT VALUE",
+              "const requestOptions = {",
+              "    url: urlToGetDinosaurs,",
+              "    method: 'GET',",
+              "    header: {",
+              "        'Accept': 'application/json',",
+              "        'Content-Type': 'application/x-www-form-urlencoded',",
+              "        'Authorization': `Bearer ${pm.collectionVariables.get(\"token\")}`",
+              "    }",
+              "}",
+              "",
+              "pm.sendRequest(requestOptions, function (_err, res) {",
+              "    const firstName = pm.variables.replaceIn(\"{{$randomFirstName}}\");",
+              "    pm.variables.set(\"firstName\", firstName);",
+              "",
+              "    const firstDinosaur = res.json()[0];",
+              "    console.log(firstDinosaur);",
+              "",
+              "    pm.variables.set(\"currentSlug\", firstDinosaur.id);",
+              "    pm.variables.set(\"surrentFirstName\", firstDinosaur.firstName);",
+              "    pm.variables.set(\"currentLastName\", firstDinosaur.lastName);",
+              "    pm.variables.set(\"currentName\", firstDinosaur.name);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "cc0b6371-bc06-49ab-8d15-4d8daf1412ab",
+            "exec": [
+              "const jsonData = pm.response.json();",
+              "",
+              "pm.test(\"Same name\", function () {",
+              "    pm.expect(jsonData.name).to.eql(pm.variables.get(\"currentName\"));",
+              "});",
+              "pm.test(\"Same lastName\", function () {",
+              "    pm.expect(jsonData.lastName).to.eql(pm.variables.get(\"currentLastName\"));",
+              "});",
+              "pm.test(\"Same slug\", function () {",
+              "    pm.expect(jsonData.id).to.eql(pm.variables.get(\"currentSlug\"));",
+              "});",
+              "pm.test(\"Different firstName\", function () {",
+              "    pm.expect(jsonData.firstName).to.not.eql(pm.variables.get(\"currentFirstName\"));",
+              "});",
+              "",
+              "",
+              "// CLEAN COLLECTION VARIABLES"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "8aefb5e7-f41f-482e-967c-b9ad38579699",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"firstName\": \"{{firstName}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/{{apiVersion}}/{{context}}/{{currentSlug}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "{{apiVersion}}",
+            "{{context}}",
+            "{{currentSlug}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "3a26caba-6bdd-4c9b-8168-8536ea133e80",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "4fedaeaf-876f-42fe-a8e3-91e135c70615",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "e642cc81-743d-422b-9e4a-cd2f47b734b8",
+      "key": "apiVersion",
+      "value": "v2"
+    }
+  ]
+}

@@ -1,0 +1,321 @@
+{
+  "info": {
+    "_postman_id": "48bc180b-285c-4533-b6f2-498ffa82e841",
+    "name": "02 Variables et Environnement",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Récupération d'un token",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "f9538ac4-a088-410d-8af6-b0fbfc07839d",
+            "exec": [
+              "const response = pm.response.json();",
+              "",
+              "pm.collectionVariables.set(\"token\", response.access_token);"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "ccb8bb47-d9e6-4a56-ae3d-787d8a519c59",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "f17cfe88-83f0-44fe-9f17-eb40395347b0",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"client_id\":\"{{clientId}}\",\n    \"client_secret\":\"{{clientSecret}}\",\n    \"audience\":\"{{audience}}\",\n    \"grant_type\":\"client_credentials\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{urlToGetToken}}",
+          "host": [
+            "{{urlToGetToken}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Observer tous les dinosaures",
+      "id": "cc8e4048-e078-470c-8d96-5eacb9bcd02a",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/{{apiVersion}}/{{context}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "{{apiVersion}}",
+            "{{context}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Créer un dinosaure",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "ea7f8076-2cbc-4ad2-927f-08fa5bb34fc5",
+            "exec": [
+              "pm.variables.set(\"firstName\", \"John\");",
+              "pm.environment.set(\"lastName\", \"Doe\");",
+              "",
+              "const firstName = `${pm.variables.get(\"firstName\")}`.toLowerCase();",
+              "const lastName = `${pm.environment.get(\"lastName\")}`.toLowerCase();",
+              "",
+              "const name = `${firstName}${lastName}`;",
+              "pm.variables.set(\"name\", name);"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "07c493fb-f399-4a03-9280-35160d7b9229",
+            "exec": [
+              "pm.environment.unset(\"lastName\");"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "005ee87f-6d33-4ab6-bed2-b708491f89b5",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"slug\": \"dinosaurus\",\n    \"firstName\": \"{{firstName}}\",\n    \"lastName\": \"{{lastName}}\",\n    \"name\": \"{{name}}saurus\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/{{apiVersion}}/{{context}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "{{apiVersion}}",
+            "{{context}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Faire muter un dinosaures",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "87252417-e46d-46fd-86f6-6a385e48b582",
+            "exec": [
+              "const firstName = pm.variables.replaceIn(\"{{$randomFirstName}}\");",
+              "const lastName = pm.variables.replaceIn(\"{{$randomLastName}}\");",
+              "const name = `${firstName.toLowerCase()}${lastName.toLowerCase()}${pm.globals.get(\"dinoSuffix\")}`;",
+              "const slug = `${firstName.toLowerCase().charAt(0)}${lastName.toLowerCase()}`;",
+              "",
+              "pm.variables.set(\"firstName\", firstName);",
+              "pm.variables.set(\"lastName\", lastName);",
+              "pm.variables.set(\"name\", name);",
+              "",
+              "console.log({firstName}, {lastName}, {name}, {slug});"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "85c0b061-8284-48e3-b8b1-793bd9153308",
+            "exec": [
+              "",
+              "",
+              "pm.collectionVariables.set(\"currentUser\", \"variable_value\");"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "055829fc-85ce-4374-89ff-a48a97c7370c",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"slug\": \"dinosaurus\",\n    \"name\": \"{{name}}\",\n    \"firstName\": \"{{firstName}}\",\n    \"lastName\": \"{{lastName}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/{{apiVersion}}/{{context}}/dinosaurus",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "{{apiVersion}}",
+            "{{context}}",
+            "dinosaurus"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Faire évoluer un dinosaure",
+      "id": "e7e3ded9-ebbf-4416-8c30-02a2c7373deb",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"angelosaurus\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/{{apiVersion}}/{{context}}/dinosaurus",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "{{apiVersion}}",
+            "{{context}}",
+            "dinosaurus"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Faire disparaître un dinosaure",
+      "id": "75b6b359-99d0-4f04-96e7-bca08e85dc11",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/{{apiVersion}}/{{context}}/dinosaurus",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "{{apiVersion}}",
+            "{{context}}",
+            "dinosaurus"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "14e65780-4121-431d-9276-18902065de3d",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "8c457e33-c1de-4520-b22a-f0ff27b63e52",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "0887f4e6-a7ad-428f-a21c-99b07010a0f9",
+      "key": "apiVersion",
+      "value": "v2"
+    }
+  ]
+}

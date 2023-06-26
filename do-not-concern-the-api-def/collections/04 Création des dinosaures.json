@@ -1,0 +1,131 @@
+{
+  "info": {
+    "_postman_id": "2daa560c-a827-478d-b646-8c578e83d1e6",
+    "name": "04 Création des dinosaures",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Créer un dinosaure",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "3940cb01-061c-49ce-abf3-ca815a6fc3b9",
+            "exec": [
+              "const firstName = pm.variables.replaceIn(\"{{$randomFirstName}}\");",
+              "const lastName = pm.variables.replaceIn(\"{{$randomLastName}}\");",
+              "const name = `${firstName.toLowerCase()}${lastName.toLowerCase()}${pm.globals.get(\"dinoSuffix\")}`;",
+              "const slug = `${firstName.toLowerCase().charAt(0)}${lastName.toLowerCase()}`;",
+              "",
+              "pm.collectionVariables.set(\"firstName\", firstName);",
+              "pm.collectionVariables.set(\"lastName\", lastName);",
+              "pm.collectionVariables.set(\"name\", name);",
+              "pm.collectionVariables.set(\"slug\", slug);"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "876724e0-b133-4000-9a26-7032a326a70e",
+            "exec": [
+              "const response = pm.response.json();",
+              "const body = JSON.parse(pm.request.body.toString());",
+              "// const body = pm.request.body.toString();",
+              "// const jsonBody = JSON.parse(body);",
+              "console.log({response}, {body});",
+              "pm.collectionVariables.set(\"currentSlug\", response.id);",
+              "",
+              "// Tests",
+              "pm.test(\"Status code is 201\", function () {",
+              "    pm.response.to.have.status(201);",
+              "    pm.response.to.have.status(\"Created\");",
+              "});",
+              "",
+              "pm.test(\"Body matches json as expected\", function () {",
+              "    pm.expect(response.firstName).to.eql(pm.collectionVariables.get(\"firstName\"));",
+              "    pm.expect(response.lastName).to.eql(pm.collectionVariables.get(\"lastName\"));",
+              "    pm.expect(response.email).to.eql(body.email);",
+              "    pm.expect(response.id).to.exist;",
+              "});",
+              "",
+              "pm.test(\"Response time is less than 300ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(300);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "ce1a2f2f-e273-40bf-8449-d33b4761458d",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"slug\": \"{{slug}}\",\n    \"firstName\": \"{{firstName}}\",\n    \"lastName\": \"{{lastName}}\",\n    \"name\": \"{{name}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/{{apiVersion}}/{{context}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "{{apiVersion}}",
+            "{{context}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjBndjNVNFFPcVJleFBLTGtxMkVhSCJ9.eyJpc3MiOiJodHRwczovL2JyZWl6aGNhbXAuZXUuYXV0aDAuY29tLyIsInN1YiI6IlcyWjd5cDc1SDJid2llMGxOdjJId2EwTXJsT2VvNkFxQGNsaWVudHMiLCJhdWQiOiJodHRwczovL2FwaS5icmVpemhjYW1wLmNvbSIsImlhdCI6MTY4NzY4NzE1MywiZXhwIjoxNjg3NzczNTUzLCJhenAiOiJXMlo3eXA3NUgyYndpZTBsTnYySHdhME1ybE9lbzZBcSIsInNjb3BlIjoicmVhZDpkaW5vc2F1cnMgdXBkYXRlOmRpbm9zYXVycyBkZWxldGU6ZGlub3NhdXJzIiwiZ3R5IjoiY2xpZW50LWNyZWRlbnRpYWxzIn0.KotGJz1BTC0TJwa-ngB0dRRe_8quS4fz1oEyvPksdCDkc2F0PmzlpWGdVhSmoksC3dIFt4XIyatXuwGvTYfSIH3LDIYiNxsFYrhNs3XkcqwYWqxmI3Q3fwrz5Sk1JPCcL7wE-AnpGExECjmFPbyevEtOnaV4j5Zgqzl989si433k1hZ-Z0wQ0gYdKc303quZpZzhD6jJuxXlELuWj7CVvtKHPxZAofMU11-BbYUo-6VhN53FIHUUDw0E0x_HmJDgd1lyWVtNtfqRpPdfqbDR2tbH_KJxjtnw_RVOjdcesgQqtzrcc0XAt0CWCt_aFyl2jEUkFkb2nHkfcxZwdGzi1g",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "2b8823e4-724d-4d39-99e8-cb52d9ce0669",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "809bb7cc-6938-4754-a232-e2bf78ac6946",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "56d48954-816c-47e6-9d81-3424252c7036",
+      "key": "apiVersion",
+      "value": "v2"
+    }
+  ]
+}

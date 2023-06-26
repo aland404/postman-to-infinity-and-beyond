@@ -1,0 +1,155 @@
+{
+  "info": {
+    "_postman_id": "e4f8f924-d460-4682-b3c2-c0db095aa5b2",
+    "name": "07 Tests de performance",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Voir tous les dinosaures",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "94be0188-5ac7-4cec-9bef-72dc8cccf233",
+            "exec": [
+              "const jsonData = pm.response.json();",
+              "",
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Returns a list of dinosaurs\", function () {",
+              "    pm.expect(jsonData.length >= 0).to.be.true;",
+              "});",
+              "",
+              "pm.test(\"Response time is less than 200ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(200);",
+              "});",
+              "",
+              "// Visualizer",
+              "var template = `",
+              "    <table>",
+              "        <tr bgcolor=\"#FFDDAA\">",
+              "            <th>Id</th>",
+              "            <th>Name</th>",
+              "        </tr>",
+              "",
+              "        {{#each response}}",
+              "            <tr>",
+              "                <td>{{id}}</td>",
+              "                <td>{{name}}</td>",
+              "            </tr>",
+              "        {{/each}}",
+              "    </table>",
+              "`;",
+              "// Set visualizer",
+              "pm.visualizer.set(template, {",
+              "    // Pass the response body parsed as JSON as `data`",
+              "    response: pm.response.json()",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "e837b79e-85b5-4020-a1e4-f930c10fecfe",
+            "exec": [
+              "/**",
+              "",
+              "const jwtToken = pm.collectionVariables.get(\"token\");",
+              "",
+              "if(!jwtToken) {",
+              "    const requestOptions = {",
+              "        url: pm.environment.get(\"urlToGetToken\"),",
+              "        method: 'POST',",
+              "        header: {",
+              "            'Accept': 'application/json',",
+              "            'Content-Type': 'application/x-www-form-urlencoded'",
+              "        },",
+              "        body: {",
+              "            mode: 'urlencoded',",
+              "            urlencoded: [",
+              "                { key: \"client_id\", value : pm.environment.get(\"clientId\") , disabled: false},",
+              "                { key: \"client_secret\", value : pm.environment.get(\"clientSecret\") , disabled: false},",
+              "                { key: \"audience\", value : pm.environment.get(\"audience\") , disabled: false},",
+              "                { key: \"grant_type\", value : \"client_credentials\" , disabled: false}",
+              "            ]",
+              "        }",
+              "    }",
+              "",
+              "    pm.sendRequest(requestOptions, function (_err, res) {",
+              "        console.log(res.json().access_token);",
+              "        pm.collectionVariables.set(\"token\", res.json().access_token);",
+              "    });",
+              "}",
+              "**/"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "2981ac4f-7a6a-402e-8f54-92b6f8adf35d",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/{{apiVersion}}/{{context}}/perf",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "{{apiVersion}}",
+            "{{context}}",
+            "perf"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "ed011efc-34bd-482d-b9ff-61c5ffe27b74",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "cdd97857-3ad5-4097-974c-05ac535654af",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "e7409bbd-d213-4da0-aefd-90350ba8f644",
+      "key": "apiVersion",
+      "value": "v1"
+    }
+  ]
+}

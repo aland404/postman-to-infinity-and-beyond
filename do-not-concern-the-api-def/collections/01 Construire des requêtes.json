@@ -1,0 +1,206 @@
+{
+  "info": {
+    "_postman_id": "559cd6f0-0b98-4770-8965-bde90478dcb8",
+    "name": "01 Construire des requêtes",
+    "description": "Une collection pour apprendre à construire des requêtes avec Postman",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Récupération d'un token",
+      "id": "6807c661-379a-4438-90b0-3cb410c87dc0",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"client_id\":\"{{clientId}}\",\n    \"client_secret\":\"{{clientSecret}}\",\n    \"audience\":\"{{audience}}\",\n    \"grant_type\":\"client_credentials\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://breizhcamp.eu.auth0.com/oauth/token",
+          "protocol": "https",
+          "host": [
+            "breizhcamp",
+            "eu",
+            "auth0",
+            "com"
+          ],
+          "path": [
+            "oauth",
+            "token"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Observer tous les dinosaures",
+      "id": "bf325adc-ee30-4c5b-8ea4-1929872a2f3d",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkpONklmRlRPNmhjMnkzQXdLbDFiMCJ9.eyJpc3MiOiJodHRwczovL2Rldi14Mmk2ZzJmeS51cy5hdXRoMC5jb20vIiwic3ViIjoiMWVhOUR4WE5OYzJuWkVzWndST0o0N1FBM2o0TUY3Q1JAY2xpZW50cyIsImF1ZCI6Imh0dHBzOi8vYXBpLmJyZWl6aGNhbXAuY29tIiwiaWF0IjoxNjg2MDc3MDQ5LCJleHAiOjE2ODYxNjM0NDksImF6cCI6IjFlYTlEeFhOTmMyblpFc1p3Uk9KNDdRQTNqNE1GN0NSIiwic2NvcGUiOiJyZWFkOmRpbm9zYXVycyB1cGRhdGU6ZGlub3NhdXJzIGRlbGV0ZTpkaW5vc2F1cnMiLCJndHkiOiJjbGllbnQtY3JlZGVudGlhbHMifQ.P64imsV_7v2-XH4C9rbsXRVRUosJ6RilqenRgrMnIFOzqMgRGMH8-9NsqBuFIoQyZR8OOqWPHuHqg-TVizl9cQO3bj_NxhcsEJhctUJ6HL2Wu5DA4LgasHTIXL7kXaFs2a0BLLtkLqsr9W21ObmzNF3220Y4trlt0edLU9InIjet6x_6bX-t37ya7icv_WGXdFY88oSmIWMbhSwRB1ezgc9yyYnLsuB7UbIxCMywoNzAkQ-JWY0K3JyQFghRV0vTVCh9bqvzncnGb3EBrCHeWD09OxyZgrkbm3d85HGJtnl8-uJol-J6pQOGXHWDk53_zHreHWvtpkrsAROpyxvvFQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3010/v1/dinosaurs",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3010",
+          "path": [
+            "v1",
+            "dinosaurs"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Observer les 2 premiers dinosaures sur mon passage",
+      "id": "bcc91f7c-4c28-44b0-a124-48761346742c",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkpONklmRlRPNmhjMnkzQXdLbDFiMCJ9.eyJpc3MiOiJodHRwczovL2Rldi14Mmk2ZzJmeS51cy5hdXRoMC5jb20vIiwic3ViIjoiMWVhOUR4WE5OYzJuWkVzWndST0o0N1FBM2o0TUY3Q1JAY2xpZW50cyIsImF1ZCI6Imh0dHBzOi8vYXBpLmJyZWl6aGNhbXAuY29tIiwiaWF0IjoxNjg2MDc3MDQ5LCJleHAiOjE2ODYxNjM0NDksImF6cCI6IjFlYTlEeFhOTmMyblpFc1p3Uk9KNDdRQTNqNE1GN0NSIiwic2NvcGUiOiJyZWFkOmRpbm9zYXVycyB1cGRhdGU6ZGlub3NhdXJzIGRlbGV0ZTpkaW5vc2F1cnMiLCJndHkiOiJjbGllbnQtY3JlZGVudGlhbHMifQ.P64imsV_7v2-XH4C9rbsXRVRUosJ6RilqenRgrMnIFOzqMgRGMH8-9NsqBuFIoQyZR8OOqWPHuHqg-TVizl9cQO3bj_NxhcsEJhctUJ6HL2Wu5DA4LgasHTIXL7kXaFs2a0BLLtkLqsr9W21ObmzNF3220Y4trlt0edLU9InIjet6x_6bX-t37ya7icv_WGXdFY88oSmIWMbhSwRB1ezgc9yyYnLsuB7UbIxCMywoNzAkQ-JWY0K3JyQFghRV0vTVCh9bqvzncnGb3EBrCHeWD09OxyZgrkbm3d85HGJtnl8-uJol-J6pQOGXHWDk53_zHreHWvtpkrsAROpyxvvFQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3010/v1/dinosaurs?page=0&limit=2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3010",
+          "path": [
+            "v1",
+            "dinosaurs"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "0"
+            },
+            {
+              "key": "limit",
+              "value": "2"
+            },
+            {
+              "key": "dzdad",
+              "value": null,
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Créer un dinosaure",
+      "id": "8a83226a-dc86-4e40-9569-0baea3f4fdd2",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkpONklmRlRPNmhjMnkzQXdLbDFiMCJ9.eyJpc3MiOiJodHRwczovL2Rldi14Mmk2ZzJmeS51cy5hdXRoMC5jb20vIiwic3ViIjoiMWVhOUR4WE5OYzJuWkVzWndST0o0N1FBM2o0TUY3Q1JAY2xpZW50cyIsImF1ZCI6Imh0dHBzOi8vYXBpLmJyZWl6aGNhbXAuY29tIiwiaWF0IjoxNjg2MDc3MDQ5LCJleHAiOjE2ODYxNjM0NDksImF6cCI6IjFlYTlEeFhOTmMyblpFc1p3Uk9KNDdRQTNqNE1GN0NSIiwic2NvcGUiOiJyZWFkOmRpbm9zYXVycyB1cGRhdGU6ZGlub3NhdXJzIGRlbGV0ZTpkaW5vc2F1cnMiLCJndHkiOiJjbGllbnQtY3JlZGVudGlhbHMifQ.P64imsV_7v2-XH4C9rbsXRVRUosJ6RilqenRgrMnIFOzqMgRGMH8-9NsqBuFIoQyZR8OOqWPHuHqg-TVizl9cQO3bj_NxhcsEJhctUJ6HL2Wu5DA4LgasHTIXL7kXaFs2a0BLLtkLqsr9W21ObmzNF3220Y4trlt0edLU9InIjet6x_6bX-t37ya7icv_WGXdFY88oSmIWMbhSwRB1ezgc9yyYnLsuB7UbIxCMywoNzAkQ-JWY0K3JyQFghRV0vTVCh9bqvzncnGb3EBrCHeWD09OxyZgrkbm3d85HGJtnl8-uJol-J6pQOGXHWDk53_zHreHWvtpkrsAROpyxvvFQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"slug\": \"a-faire-disparaitre\",\n    \"firstName\": \"Marty\",\n    \"lastName\": \"Rex\",\n    \"name\": \"Dinosaurus\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3010/v1/dinosaurs",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3010",
+          "path": [
+            "v1",
+            "dinosaurs"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Faire disparaître un dinosaure",
+      "id": "efcfb9f4-de75-47ea-af02-3547688ad90b",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkpONklmRlRPNmhjMnkzQXdLbDFiMCJ9.eyJpc3MiOiJodHRwczovL2Rldi14Mmk2ZzJmeS51cy5hdXRoMC5jb20vIiwic3ViIjoiMWVhOUR4WE5OYzJuWkVzWndST0o0N1FBM2o0TUY3Q1JAY2xpZW50cyIsImF1ZCI6Imh0dHBzOi8vYXBpLmJyZWl6aGNhbXAuY29tIiwiaWF0IjoxNjg2MDc3MDQ5LCJleHAiOjE2ODYxNjM0NDksImF6cCI6IjFlYTlEeFhOTmMyblpFc1p3Uk9KNDdRQTNqNE1GN0NSIiwic2NvcGUiOiJyZWFkOmRpbm9zYXVycyB1cGRhdGU6ZGlub3NhdXJzIGRlbGV0ZTpkaW5vc2F1cnMiLCJndHkiOiJjbGllbnQtY3JlZGVudGlhbHMifQ.P64imsV_7v2-XH4C9rbsXRVRUosJ6RilqenRgrMnIFOzqMgRGMH8-9NsqBuFIoQyZR8OOqWPHuHqg-TVizl9cQO3bj_NxhcsEJhctUJ6HL2Wu5DA4LgasHTIXL7kXaFs2a0BLLtkLqsr9W21ObmzNF3220Y4trlt0edLU9InIjet6x_6bX-t37ya7icv_WGXdFY88oSmIWMbhSwRB1ezgc9yyYnLsuB7UbIxCMywoNzAkQ-JWY0K3JyQFghRV0vTVCh9bqvzncnGb3EBrCHeWD09OxyZgrkbm3d85HGJtnl8-uJol-J6pQOGXHWDk53_zHreHWvtpkrsAROpyxvvFQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3010/v1/dinosaurs/a-faire-disparaitre",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3010",
+          "path": [
+            "v1",
+            "dinosaurs",
+            "a-faire-disparaitre"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

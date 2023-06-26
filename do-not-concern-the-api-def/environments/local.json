@@ -1,0 +1,57 @@
+{
+	"id": "483184ea-e9c0-4ab6-ac24-6d0a1ef10462",
+	"name": "Local",
+	"values": [
+		{
+			"key": "baseUrl",
+			"value": "TBD",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "apiId",
+			"value": "TBD",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "clientId",
+			"value": "TBD",
+			"type": "secret",
+			"enabled": true
+		},
+		{
+			"key": "clientSecret",
+			"value": "TBD",
+			"type": "secret",
+			"enabled": true
+		},
+		{
+			"key": "audience",
+			"value": "TBD",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "urlToGetToken",
+			"value": "TBD",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "context",
+			"value": "dinosaurs",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "dinoSuffix",
+			"value": "osaurus",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2023-06-26T13:54:58.820Z",
+	"_postman_exported_using": "Postman/10.15.4"
+}
