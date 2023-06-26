@@ -1,7 +1,11 @@
 name: Automated API tests - Postman CLI
 
-on: push
-
+# Only trigger, when the "Automated API tests" - Newman workflow succeeded
+on:
+  workflow_run:
+    workflows: ["Automated API tests - Newman"]
+    types:
+      - completed
 env:
   COLLECTION_ID: 28191179-c7fa9d9d-fab7-4224-b162-90203eba11f2
   ENVIRONMENT_ID: 28191179-f9236695-9a41-4a9b-8126-cbabf1fcbd20
