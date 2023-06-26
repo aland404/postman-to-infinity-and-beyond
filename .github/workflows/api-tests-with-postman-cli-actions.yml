@@ -18,7 +18,7 @@ jobs:
       - name: Login to Postman CLI
         run: postman login --with-api-key ${{ env.POSTMAN_API_KEY }}
       - name: Run API tests with Postman CLI
-        run: postman collection run ${{ github.workspace }}/postman/collections/Dinosaurs_API.json --environment ${{ env.ENVIRONMENT_ID }}
+        run: postman collection run ${{ github.workspace }}/do-not-concern-the-api-def/collections/05_Tests_fonctionnels.json --environment ${{ env.ENVIRONMENT_ID }}
 
   postman-cli-collection-id:
     runs-on: ubuntu-latest
