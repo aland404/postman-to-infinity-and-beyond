@@ -3,11 +3,8 @@ name: Automated API tests - Postman CLI
 on: push
 
 env:
-  DINOSAURS_API_ID: ed430ec7-957d-44d6-b154-46d7de092773
-  COLLECTION_ID: 24574593-b537b40b-930a-4255-85b8-fe85e71026d8
-  ENVIRONMENT_ID: 24574593-5c19695f-a80c-4e99-8efe-20b61147ce3f
-  POSTMAN_INTEGRATION_ID: 141759
-  GITHUB_INTEGRATION_ID: 141759-${{ github.run_id }}
+  COLLECTION_ID: 28191179-c7fa9d9d-fab7-4224-b162-90203eba11f2
+  ENVIRONMENT_ID: 28191179-f9236695-9a41-4a9b-8126-cbabf1fcbd20
   POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
 
 jobs:
@@ -21,9 +18,7 @@ jobs:
       - name: Login to Postman CLI
         run: postman login --with-api-key ${{ env.POSTMAN_API_KEY }}
       - name: Run API tests with Postman CLI
-        run: postman collection run ${{ github.workspace }}/postman/collections/Dinosaurs_API.json --environment ${{ env.ENVIRONMENT_ID }} --integration-id ${{ env.GITHUB_INTEGRATION_ID }}
-      - name: Lint API with Postman CLI
-        run: postman api lint ${{ env.DINOSAURS_API_ID }} --integration-id ${{ env.POSTMAN_INTEGRATION_ID }}
+        run: postman collection run ${{ github.workspace }}/postman/collections/Dinosaurs_API.json --environment ${{ env.ENVIRONMENT_ID }}
 
   postman-cli-collection-id:
     runs-on: ubuntu-latest
@@ -34,4 +29,4 @@ jobs:
       - name: Login to Postman CLI
         run: postman login --with-api-key ${{ env.POSTMAN_API_KEY }}
       - name: Run API tests with Postman CLI
-        run: postman collection run ${{ env.COLLECTION_ID }} --environment ${{ env.ENVIRONMENT_ID }} --integration-id ${{ env.GITHUB_INTEGRATION_ID }}
+        run: postman collection run ${{ env.COLLECTION_ID }} --environment ${{ env.ENVIRONMENT_ID }}
