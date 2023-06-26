@@ -1,15 +1,15 @@
 {
 	"info": {
-		"_postman_id": "e7dfea8b-44d1-4151-9ea6-8ea4926d3a4a",
+		"_postman_id": "86ed9c59-0f63-40e7-a30e-9b53660d84f2",
 		"name": "Dinosaurs_API",
 		"description": "Handle Dinosaurs",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "24574593-e7dfea8b-44d1-4151-9ea6-8ea4926d3a4a"
+		"_uid": "28191179-86ed9c59-0f63-40e7-a30e-9b53660d84f2"
 	},
 	"item": [
 		{
 			"name": "Get all dinosaurs",
-			"id": "f313503e-66b2-41e3-be98-81049b3494f9",
+			"id": "5423a666-e034-49d2-bfb2-30ccd899cbe8",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -54,7 +54,7 @@
 			},
 			"response": [
 				{
-					"id": "dea572e2-2506-40c3-871a-d500baeb3f50",
+					"id": "3a85ddbc-d5cd-4049-b5e4-07d05c230a65",
 					"name": "All existing and alive dinosaurs",
 					"originalRequest": {
 						"method": "GET",
@@ -83,6 +83,7 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Content-Type",
@@ -93,7 +94,7 @@
 					"body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"size\": \"XL\",\n    \"description\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"size\": \"L\",\n    \"description\": \"<string>\"\n  }\n]"
 				},
 				{
-					"id": "5580c985-1c25-4fb7-acd0-ba441f0d88f1",
+					"id": "33aabc13-f5e7-46fb-bb5b-b5574794ac01",
 					"name": "Access token is missing or invalid",
 					"originalRequest": {
 						"method": "GET",
@@ -122,6 +123,7 @@
 					"status": "Unauthorized",
 					"code": 401,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Content-Type",
@@ -132,7 +134,7 @@
 					"body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}"
 				},
 				{
-					"id": "0670bd3b-d19f-428a-949f-b2d28a3048f0",
+					"id": "e21b672d-a74d-4339-8733-fea3847aa822",
 					"name": "The access to the requested resource is prohibited",
 					"originalRequest": {
 						"method": "GET",
@@ -161,6 +163,7 @@
 					"status": "Forbidden",
 					"code": 403,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Content-Type",
@@ -171,7 +174,7 @@
 					"body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}"
 				},
 				{
-					"id": "3ad4837f-e261-4f7d-b256-830705e940c3",
+					"id": "0483bc73-bb06-40ef-ad89-c074fca07157",
 					"name": "Unexpected error",
 					"originalRequest": {
 						"method": "GET",
@@ -200,6 +203,7 @@
 					"status": "Internal Server Error",
 					"code": 500,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Content-Type",
@@ -213,7 +217,7 @@
 		},
 		{
 			"name": "Get a specific dinosaur by its id",
-			"id": "43ea4c91-7483-4b99-81c4-fd3890890628",
+			"id": "707e2bcc-0849-42c9-bf4d-e245f02abd68",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -265,7 +269,7 @@
 			},
 			"response": [
 				{
-					"id": "46b8ea2a-7c3e-43cd-a335-9f7754ab5535",
+					"id": "ee6c62ff-2d55-43ae-91d7-c14d0905c0c1",
 					"name": "The dinosaur corresponding to the provided `dinosaurId`",
 					"originalRequest": {
 						"method": "GET",
@@ -300,6 +304,7 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Content-Type",
@@ -310,7 +315,7 @@
 					"body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"size\": \"M\",\n  \"description\": \"<string>\"\n}"
 				},
 				{
-					"id": "e34da162-abc0-4718-9835-810044f43195",
+					"id": "457145d7-c2e1-43dc-821d-210254ddf068",
 					"name": "No dinosaur found for the provided `dinosaurId`",
 					"originalRequest": {
 						"method": "GET",
@@ -341,11 +346,12 @@
 					"status": "No Content",
 					"code": 204,
 					"_postman_previewlanguage": "text",
+					"_postman_previewtype": "html",
 					"header": [],
 					"cookie": []
 				},
 				{
-					"id": "530099f4-c5eb-4561-b7ca-0183463d0a90",
+					"id": "2ace9b88-a833-4503-ac22-6c941debc529",
 					"name": "Access token is missing or invalid",
 					"originalRequest": {
 						"method": "GET",
@@ -380,6 +386,7 @@
 					"status": "Unauthorized",
 					"code": 401,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Content-Type",
@@ -390,7 +397,7 @@
 					"body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}"
 				},
 				{
-					"id": "ea998c1b-2e3f-4b8f-99d8-cbf32da54358",
+					"id": "050b7616-1a4b-439e-8a3c-e90b318fc664",
 					"name": "The access to the requested resource is prohibited",
 					"originalRequest": {
 						"method": "GET",
@@ -425,6 +432,7 @@
 					"status": "Forbidden",
 					"code": 403,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Content-Type",
@@ -435,7 +443,7 @@
 					"body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}"
 				},
 				{
-					"id": "a628fad7-65f8-4298-bdca-08b10ef4c311",
+					"id": "2143969a-ccf6-486a-bb82-bf5913b51527",
 					"name": "Unexpected error",
 					"originalRequest": {
 						"method": "GET",
@@ -470,6 +478,7 @@
 					"status": "Internal Server Error",
 					"code": 500,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Content-Type",
