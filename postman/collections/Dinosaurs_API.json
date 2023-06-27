@@ -83,7 +83,6 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Content-Type",
@@ -123,7 +122,6 @@
 					"status": "Unauthorized",
 					"code": 401,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Content-Type",
@@ -163,7 +161,6 @@
 					"status": "Forbidden",
 					"code": 403,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Content-Type",
@@ -203,7 +200,6 @@
 					"status": "Internal Server Error",
 					"code": 500,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Content-Type",
@@ -262,7 +258,7 @@
 					"variable": [
 						{
 							"key": "dinosaurId",
-							"value": "<string>"
+							"value": null
 						}
 					]
 				}
@@ -304,7 +300,6 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Content-Type",
@@ -346,7 +341,6 @@
 					"status": "No Content",
 					"code": 204,
 					"_postman_previewlanguage": "text",
-					"_postman_previewtype": "html",
 					"header": [],
 					"cookie": []
 				},
@@ -386,7 +380,6 @@
 					"status": "Unauthorized",
 					"code": 401,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Content-Type",
@@ -432,7 +425,6 @@
 					"status": "Forbidden",
 					"code": 403,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Content-Type",
@@ -478,7 +470,6 @@
 					"status": "Internal Server Error",
 					"code": 500,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Content-Type",
@@ -491,11 +482,26 @@
 			]
 		}
 	],
-	"variable": [
+	"event": [
 		{
-			"id": "830b7e11-d95c-4002-a90a-780d9e9a9323",
-			"key": "baseUrl",
-			"value": "http://localhost:3010/v1"
+			"listen": "prerequest",
+			"script": {
+				"id": "27a1b19c-7fce-4d8c-ac15-51861ecd36e0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "117842dd-485a-4573-a6ff-7879b8fc6ec4",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }

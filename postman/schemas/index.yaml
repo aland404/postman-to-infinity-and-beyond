@@ -1,7 +1,7 @@
-openapi: "3.0.0"
+openapi: "3.0.1"
 servers:
-    - url: http://localhost:3010/v1
-      description: Localhost server
+    - url: https://396cee42-4c57-45c6-abdc-ea31105be27f.mock.pstmn.io
+      description: Mock server
 info:
     version: "1.0.0"
     title: "Dinosaurs API"
